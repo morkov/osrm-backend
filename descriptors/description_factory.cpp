@@ -98,6 +98,17 @@ void DescriptionFactory::AppendSegment(const FixedPointCoordinate &coordinate,
                                   turn, path_point.travel_mode);
 }
 
+osrm::json::Value DescriptionFactory::AppendNodesList(const std::vector<std::vector<PathData>>& data)
+{
+    osrm::json::Array route_nodes;
+    for (auto it = data.begin(); it != data.end(); ++it) {
+        for (auto snd = it->begin(); snd != it->end(); ++snd) {
+            route_nodes.values.push_back(snd->node);
+        }
+    }
+    return route_nodes;
+}
+
 osrm::json::Value DescriptionFactory::AppendGeometryString(const bool return_encoded)
 {
     if (return_encoded)

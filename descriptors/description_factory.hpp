@@ -86,6 +86,7 @@ class DescriptionFactory
                        const bool traversed_in_reverse,
                        const bool is_via_location = false);
     osrm::json::Value AppendGeometryString(const bool return_encoded);
+    osrm::json::Value AppendNodesList(const std::vector<std::vector<PathData>>& data);
     std::vector<unsigned> const &GetViaIndices() const;
 
     double get_entire_length() const { return entire_length; }

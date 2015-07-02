@@ -135,6 +135,9 @@ template <class DataFacadeT> class JSONDescriptor final : public BaseDescriptor<
         }
         description_factory.Run(config.zoom_level);
 
+        osrm::json::Value route_nodes = description_factory.AppendNodesList(raw_route.unpacked_path_segments);
+        json_result.values["route_nodes"] = route_nodes;
+
         if (config.geometry)
         {
             osrm::json::Value route_geometry =
