@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "../algorithms/polyline_compressor.hpp"
 
 RouteParameters::RouteParameters()
-    : zoom_level(18), print_instructions(false), alternate_route(true), geometry(true),
+    : zoom_level(18), print_instructions(false), alternate_route(true), geometry(true), nodes(false),
       compression(true), deprecatedAPI(false), uturn_default(false), classify(false),
       matching_beta(-1.0), gps_precision(-1.0), check_sum(-1), num_results(1)
 {
@@ -123,6 +123,8 @@ void RouteParameters::setLanguage(const std::string &language_string)
 }
 
 void RouteParameters::setGeometryFlag(const bool flag) { geometry = flag; }
+
+void RouteParameters::setNodesFlag(const bool flag) { nodes = flag; }
 
 void RouteParameters::setCompressionFlag(const bool flag) { compression = flag; }
 

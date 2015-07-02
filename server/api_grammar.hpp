@@ -41,8 +41,8 @@ template <typename Iterator, class HandlerT> struct APIGrammar : qi::grammar<Ite
         api_call = qi::lit('/') >> string[boost::bind(&HandlerT::setService, handler, ::_1)] >>
                    *(query) >> -(uturns);
         query = ('?') >> (+(zoom | output | jsonp | checksum | location | hint | timestamp | u | cmp |
-                            language | instruction | geometry | alt_route | old_API | num_results |
-                            matching_beta | gps_precision | classify | locs));
+                            language | instruction | geometry | nodes | alt_route | old_API | num_results |
+                            matching_beta | gps_precision | classify | locs ));
 
         zoom = (-qi::lit('&')) >> qi::lit('z') >> '=' >>
                qi::short_[boost::bind(&HandlerT::setZoomLevel, handler, ::_1)];
@@ -56,6 +56,8 @@ template <typename Iterator, class HandlerT> struct APIGrammar : qi::grammar<Ite
                       qi::bool_[boost::bind(&HandlerT::setInstructionFlag, handler, ::_1)];
         geometry = (-qi::lit('&')) >> qi::lit("geometry") >> '=' >>
                    qi::bool_[boost::bind(&HandlerT::setGeometryFlag, handler, ::_1)];
+        nodes = (-qi::lit('&')) >> qi::lit("nodes") >> '=' >>
+                   qi::bool_[boost::bind(&HandlerT::setNodesFlag, handler, ::_1)];
         cmp = (-qi::lit('&')) >> qi::lit("compression") >> '=' >>
               qi::bool_[boost::bind(&HandlerT::setCompressionFlag, handler, ::_1)];
         location = (-qi::lit('&')) >> qi::lit("loc") >> '=' >>
@@ -95,7 +97,7 @@ template <typename Iterator, class HandlerT> struct APIGrammar : qi::grammar<Ite
 
     qi::rule<Iterator> api_call, query;
     qi::rule<Iterator, std::string()> service, zoom, output, string, jsonp, checksum, location,
-        hint, timestamp, stringwithDot, stringwithPercent, language, instruction, geometry, cmp, alt_route, u,
+        hint, timestamp, stringwithDot, stringwithPercent, language, instruction, geometry, nodes, cmp, alt_route, u,
         uturns, old_API, num_results, matching_beta, gps_precision, classify, locs, stringforPolyline;
 
     HandlerT *handler;

@@ -75,6 +75,8 @@ struct RouteParameters
 
     void setGeometryFlag(const bool flag);
 
+    void setNodesFlag(const bool flag);
+
     void setCompressionFlag(const bool flag);
 
     void addCoordinate(const boost::fusion::vector<double, double> &received_coordinates);
@@ -85,6 +87,7 @@ struct RouteParameters
     bool print_instructions;
     bool alternate_route;
     bool geometry;
+    bool nodes;
     bool compression;
     bool deprecatedAPI;
     bool uturn_default;
